@@ -33,4 +33,27 @@ const userLogin = async (req, res, next) => {
   res.status(200).json({ token });
 };
 
-module.exports = userLogin;
+const userRegister = async (req, res, next) => {
+  const { username, password } = req.body;
+  const user = await User.findOne({ username });
+
+  if (user) {
+    const error = customError(409, "Bad Request", "This user already exists");
+
+    next(error);
+    return;
+  }
+  try {
+    const encryptedPassword = await bcrypt.hash(password, 10);
+    const newUser = { username, password: encryptedPassword };
+
+    await User.create(newUser);
+    res.status(201).json({ username });
+  } catch {
+    const error = customError(400, "Bad request", "Wrong user data");
+
+    next(error);
+  }
+};
+
+module.exports = { userLogin, userRegister };
