@@ -21,10 +21,12 @@ const LocationSchema = new Schema({
     },
   },
   geometry: {
-    coordinates: {
-      type: Number,
-      required: true,
-    },
+    coordinates: [
+      {
+        type: Number,
+        required: true,
+      },
+    ],
   },
 });
 
