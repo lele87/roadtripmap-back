@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "start": "node src",
-    "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "husky install",
-    "start-dev": "nodemon src -q"
+    "start-dev": "nodemon src -q",
+    "test": "jest --watchAll=false",
+    "test-coverage": "jest --coverage --watchAll=false"
   },
   "keywords": [],
   "author": "",

@@ -2,15 +2,10 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
 const User = require("../database/models/User");
+const mockNewUser = require("../mocks/mockUsers");
 const { userLogin, userRegister } = require("./userControllers");
 
 const expectedToken = "1234567890";
-
-const mockNewUser = {
-  name: "lelo",
-  username: "lelo",
-  password: "1234",
-};
 
 jest.mock("../database/models/User", () => ({
   findOne: jest.fn(),
