@@ -10,12 +10,15 @@ const UserSchema = new Schema({
     type: String,
     required: true,
   },
-  locations: [
-    {
-      type: Schema.Types.ObjectId,
-      ref: "Location",
-    },
-  ],
+  locations: {
+    features: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Location",
+        default: [],
+      },
+    ],
+  },
 });
 
 const User = model("User", UserSchema, "users");
