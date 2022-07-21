@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1657817027381" clover="3.2.0">
-  <project timestamp="1657817027381" name="All files">
-    <metrics statements="74" coveredstatements="71" conditionals="13" coveredconditionals="11" methods="6" coveredmethods="6" elements="93" coveredelements="88" complexity="0" loc="74" ncloc="74" packages="4" files="6" classes="6"/>
+<coverage generated="1658397280881" clover="3.2.0">
+  <project timestamp="1658397280881" name="All files">
+    <metrics statements="78" coveredstatements="75" conditionals="13" coveredconditionals="11" methods="6" coveredmethods="6" elements="97" coveredelements="92" complexity="0" loc="78" ncloc="78" packages="5" files="8" classes="8"/>
     <package name="controllers">
       <metrics statements="46" coveredstatements="43" conditionals="6" coveredconditionals="5" methods="3" coveredmethods="3"/>
       <file name="locationControllers.js" path="/Users/EmanuelePanesi/Desktop/DEMO/roadtripmap back/src/controllers/locationControllers.js">
@@ -72,6 +72,19 @@
         <line num="3" count="1" type="stmt"/>
         <line num="24" count="1" type="stmt"/>
         <line num="26" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="mocks">
+      <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="mockLocations.js" path="/Users/EmanuelePanesi/Desktop/DEMO/roadtripmap back/src/mocks/mockLocations.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="32" count="1" type="stmt"/>
+      </file>
+      <file name="mockUsers.js" path="/Users/EmanuelePanesi/Desktop/DEMO/roadtripmap back/src/mocks/mockUsers.js">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
       </file>
     </package>
     <package name="server.middlewares">
