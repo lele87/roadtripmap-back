@@ -13,12 +13,16 @@ const LocationSchema = new Schema({
     description: {
       type: String,
     },
-    image: {
-      type: String,
-    },
-    imageBackup: {
-      type: String,
-    },
+    image: [
+      {
+        type: String,
+      },
+    ],
+    // imageBackup: [
+    //   {
+    //     type: String,
+    //   },
+    // ],
   },
   geometry: {
     coordinates: [

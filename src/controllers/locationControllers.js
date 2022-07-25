@@ -33,7 +33,7 @@ const createLocation = async (req, res, next) => {
   try {
     const { userId } = req.params;
     const { name, description, lat, lng } = req.body;
-    const { file, firebaseFileURL, newImageName } = req;
+    const { file, files, firebaseImagesUrls } = req;
 
     const user = await User.findById(userId);
 
@@ -42,8 +42,7 @@ const createLocation = async (req, res, next) => {
       properties: {
         name,
         description,
-        image: file ? path.join("images", newImageName) : "",
-        imageBackup: file ? firebaseFileURL : "",
+        image: file || files ? [...firebaseImagesUrls] : [],
       },
       geometry: {
         coordinates: [lat, lng],
