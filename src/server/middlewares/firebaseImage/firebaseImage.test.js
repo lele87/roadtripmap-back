@@ -1,6 +1,5 @@
 const fs = require("fs");
 const path = require("path");
-const firebase = require("firebase/storage");
 const firebaseImage = require("./firebaseImage");
 
 jest.mock("firebase/storage", () => ({
