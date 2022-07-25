@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-const saveImages = (req, res, next) => {
+const saveImage = (req, res, next) => {
   const { file, files } = req;
   req.imagePaths = [];
 
@@ -24,4 +24,4 @@ const saveImages = (req, res, next) => {
   next();
 };
 
-module.exports = { saveImages };
+module.exports = { saveImage };

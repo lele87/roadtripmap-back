@@ -1,7 +1,6 @@
 require("dotenv").config();
 const debug = require("debug")("roadtripmap:controllers:locationControllers");
 const chalk = require("chalk");
-const path = require("path");
 const Location = require("../database/models/Location");
 const User = require("../database/models/User");
 const customError = require("../utils/customError");

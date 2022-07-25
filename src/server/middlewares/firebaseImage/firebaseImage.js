@@ -34,7 +34,6 @@ const firebaseImage = async (req, res, next) => {
   if (file || files) {
     const storage = getStorage(firebaseApp);
     req.firebaseImagesUrls = [];
-
     req.imagePaths.map(async (image) => {
       fs.readFile(
         path.join("uploads", "locations", image),

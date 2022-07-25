@@ -18,11 +18,6 @@ const LocationSchema = new Schema({
         type: String,
       },
     ],
-    // imageBackup: [
-    //   {
-    //     type: String,
-    //   },
-    // ],
   },
   geometry: {
     coordinates: [

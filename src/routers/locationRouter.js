@@ -7,7 +7,7 @@ const {
 } = require("../controllers/locationControllers");
 const auth = require("../server/middlewares/auth");
 const firebaseImage = require("../server/middlewares/firebaseImage/firebaseImage");
-const { saveImages } = require("../server/middlewares/saveImage/saveImage");
+const { saveImage } = require("../server/middlewares/saveImage/saveImage");
 
 const upload = multer({
   dest: path.join("uploads", "locations"),
@@ -23,7 +23,7 @@ locationRouter.post(
   "/:userId",
   auth,
   upload.array("image", 10),
-  saveImages,
+  saveImage,
   firebaseImage,
   createLocation
 );
