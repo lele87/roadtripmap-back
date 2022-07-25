@@ -6,7 +6,7 @@ const mockLocations = {
         id: "1",
         name: "Lele's home",
         description: "Carrer Templers Home",
-        images: "",
+        image: "",
       },
       geometry: {
         type: "Point",
@@ -19,7 +19,7 @@ const mockLocations = {
         id: "2",
         name: "Francesco's home",
         description: "Carrer Carretes Home",
-        images: "",
+        image: "",
       },
       geometry: {
         type: "Point",

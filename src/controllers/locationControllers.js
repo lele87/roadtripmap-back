@@ -1,3 +1,7 @@
+require("dotenv").config();
+const debug = require("debug")("roadtripmap:controllers:locationControllers");
+const chalk = require("chalk");
+const path = require("path");
 const Location = require("../database/models/Location");
 const User = require("../database/models/User");
 const customError = require("../utils/customError");
@@ -24,4 +28,42 @@ const getUserLocations = async (req, res, next) => {
   }
 };
 
-module.exports = { getUserLocations };
+const createLocation = async (req, res, next) => {
+  debug(chalk.yellow("Request to add a location"));
+  try {
+    const { userId } = req.params;
+    const { name, description, lat, lng } = req.body;
+    const { file, firebaseFileURL, newImageName } = req;
+
+    const user = await User.findById(userId);
+
+    const newLocation = {
+      type: "Feature",
+      properties: {
+        name,
+        description,
+        image: file ? path.join("images", newImageName) : "",
+        imageBackup: file ? firebaseFileURL : "",
+      },
+      geometry: {
+        coordinates: [lat, lng],
+      },
+    };
+
+    const addedLocation = await Location.create(newLocation);
+    debug(chalk.greenBright("Location added to database"));
+
+    user.locations.features.push(addedLocation);
+    await User.findByIdAndUpdate(userId, user, {
+      new: true,
+    });
+    debug(chalk.greenBright("Location added to user favorite locations"));
+
+    res.status(201).json({ new_location: addedLocation });
+  } catch {
+    const error = customError(400, "Bad request", "Unable to add new location");
+    next(error);
+  }
+};
+
+module.exports = { getUserLocations, createLocation };
