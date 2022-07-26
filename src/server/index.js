@@ -8,8 +8,10 @@ const corsOptions = require("../utils/corsOptions");
 
 const app = express();
 
+app.disable("x-powered-by");
 app.use(cors(corsOptions));
 app.use(morgan("dev"));
+app.use(express.static("uploads"));
 app.use(express.json());
 
 app.use("/user", userRouter);

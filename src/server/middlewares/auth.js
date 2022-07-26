@@ -15,7 +15,7 @@ const auth = (req, res, next) => {
     const token = authorization.replace("Bearer ", "");
 
     const { id } = jwt.verify(token, process.env.JWT_SECRET);
-    req.idLocation = id;
+    req.locationId = id;
     debug(chalk.green("Received a valid token"));
 
     next();
