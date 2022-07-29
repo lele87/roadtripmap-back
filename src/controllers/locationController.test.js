@@ -2,7 +2,11 @@ const path = require("path");
 const Location = require("../database/models/Location");
 const User = require("../database/models/User");
 const mockLocations = require("../mocks/mockLocations");
-const { getUserLocations, createLocation } = require("./locationControllers");
+const {
+  getUserLocations,
+  createLocation,
+  deleteLocation,
+} = require("./locationControllers");
 
 jest.mock("fs", () => ({
   ...jest.requireActual("fs"),
@@ -129,6 +133,54 @@ describe("Given a createLocation controller", () => {
       const next = jest.fn();
 
       await createLocation(req, null, next);
+
+      expect(next).toHaveBeenCalled();
+    });
+  });
+});
+
+describe("Given a deleteLocation controller", () => {
+  describe("When invoked with a request to delete the location with the id of the first location", () => {
+    test("Then it should call the response's status method with 200, and json message with message that the location was deleted", async () => {
+      const req = {
+        params: {
+          locationId: "1",
+        },
+        userId: "1",
+      };
+
+      const expectedMessage = {
+        msg: "Location with ID 1 deleted",
+      };
+
+      const res = {
+        status: jest.fn().mockReturnThis(),
+        json: jest.fn(),
+      };
+
+      Location.findByIdAndDelete = jest
+        .fn()
+        .mockResolvedValue(mockLocations.features[0]);
+
+      User.findByIdAndUpdate = jest.fn().mockResolvedValue(true);
+
+      await deleteLocation(req, res, null);
+
+      expect(res.status).toHaveBeenCalledWith(200);
+      expect(res.json).toHaveBeenCalledWith(expectedMessage);
+    });
+  });
+  describe("When it's invoked but there is an error", () => {
+    test("Then the next function should be called ", async () => {
+      const req = {
+        params: {
+          locationId: "2",
+        },
+      };
+
+      const next = jest.fn();
+
+      await deleteLocation(req, null, next);
 
       expect(next).toHaveBeenCalled();
     });
