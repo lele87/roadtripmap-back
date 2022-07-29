@@ -14,7 +14,7 @@ const next = jest.fn();
 describe("Given a imageConverter middleware", () => {
   describe("When it receives a request with a file and the readFile fails", () => {
     test("Then it should call the next received function", async () => {
-      const req = { imagePaths: { filename: "file" } };
+      const req = { files: [] };
 
       jest
         .spyOn(path, "join")
@@ -38,7 +38,7 @@ describe("Given a imageConverter middleware", () => {
 
   describe("When it receives a request with a file and the rename fails", () => {
     test("Then it should call the next received function", async () => {
-      const req = { imagePaths: { filename: "file" } };
+      const req = { files: [] };
 
       jest
         .spyOn(path, "join")
@@ -58,7 +58,7 @@ describe("Given a imageConverter middleware", () => {
 
   describe("When it receives a request with no file", () => {
     test("Then it should call the next received function", async () => {
-      const req = { file: null };
+      const req = { files: [] };
 
       await firebaseImage(req, null, next);
 

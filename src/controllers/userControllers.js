@@ -23,7 +23,7 @@ const userLogin = async (req, res, next) => {
 
   const rightPassword = await bcrypt.compare(password, user.password);
   if (!rightPassword) {
-    const error = customError(403, "Bad request", "User or password incorrect");
+    const error = customError(403, "Bad request", "Password incorrect");
 
     next(error);
     return;

@@ -67,13 +67,11 @@ describe("Given a createLocation controller", () => {
     body: {
       name: "Lele's home",
       description: "Carrer Templers Home",
-      image: "",
-      lat: 41.38184338079825,
-      lng: 2.1788420566189455,
+      latitude: 41.38184338079825,
+      longitude: 2.1788420566189455,
     },
-    image: {
-      filename: "12798217782",
-    },
+    files: ["12798217782.jpg"],
+    firebaseImagesUrls: ["12798217783.jpg"],
     params: {
       userId: "1",
     },

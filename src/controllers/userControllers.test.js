@@ -60,6 +60,21 @@ describe("Given a userLogin function", () => {
       expect(next).toHaveBeenCalledWith(expectedError);
     });
   });
+  describe("When it receives a request with a user present in the databse but with the wrong password", () => {
+    test("Then it should call the next received function with a message 'Password incorrect'", async () => {
+      const expectedErrorMessage = "Password incorrect";
+      const next = jest.fn();
+
+      User.findOne = jest.fn().mockResolvedValue(true);
+      bcrypt.compare = jest.fn().mockReturnValue(false);
+
+      await userLogin(req, res, next);
+
+      const expectedError = new Error(expectedErrorMessage);
+
+      expect(next).toHaveBeenCalledWith(expectedError);
+    });
+  });
 });
 
 describe("Given a userRegister function", () => {
