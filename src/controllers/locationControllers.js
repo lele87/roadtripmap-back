@@ -29,10 +29,11 @@ const getUserLocations = async (req, res, next) => {
 
 const createLocation = async (req, res, next) => {
   debug(chalk.yellow("Request to add a location"));
+
   try {
     const { userId } = req.params;
-    const { name, description, lat, lng } = req.body;
-    const { file, files, firebaseImagesUrls } = req;
+    const { name, description, latitude, longitude } = req.body;
+    const { files, firebaseImagesUrls } = req;
 
     const user = await User.findById(userId);
 
@@ -41,10 +42,10 @@ const createLocation = async (req, res, next) => {
       properties: {
         name,
         description,
-        image: file || files ? [...firebaseImagesUrls] : [],
+        image: files.length !== 0 ? [...firebaseImagesUrls] : [],
       },
       geometry: {
-        coordinates: [lat, lng],
+        coordinates: [latitude, longitude],
       },
     };
 
@@ -64,4 +65,31 @@ const createLocation = async (req, res, next) => {
   }
 };
 
-module.exports = { getUserLocations, createLocation };
+const deleteLocation = async (req, res, next) => {
+  debug(chalk.yellow("Request to delete a location"));
+  const { locationId } = req.params;
+  const { userId } = req;
+
+  try {
+    await Location.findByIdAndDelete(locationId);
+    res.status(200).json({ msg: `Location with ID ${locationId} deleted` });
+
+    await User.findByIdAndUpdate(
+      userId,
+      {
+        $pull: { "locations.features": locationId },
+      },
+      { new: true }
+    );
+  } catch {
+    const error = customError(
+      400,
+      "Bad request",
+      "Unable to delete the location"
+    );
+
+    next(error);
+  }
+};
+
+module.exports = { getUserLocations, createLocation, deleteLocation };

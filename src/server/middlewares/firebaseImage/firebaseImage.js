@@ -29,11 +29,12 @@ const saveImage = async (storage, file, fileName) => {
 };
 
 const firebaseImage = async (req, res, next) => {
-  const { file, files } = req;
+  const { files } = req;
 
-  if (file || files) {
+  if (files.length !== 0) {
     const storage = getStorage(firebaseApp);
     req.firebaseImagesUrls = [];
+
     req.imagePaths.map(async (image) => {
       fs.readFile(
         path.join("uploads", "locations", image),
